@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SystemGym.Application.InputModels.v1.Client;
+using SystemGym.Application.ViewModels.v1.Client;
 
 namespace SystemGym.Application.Services.Interfaces
 {

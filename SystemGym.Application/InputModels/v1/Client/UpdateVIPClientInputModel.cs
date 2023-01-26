@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Application.InputModels.v1.Client
 {
-    public class ClientViewModel
+    public class UpdateVIPClientInputModel
     {
+        public string Document { get; set; }
+        public bool VIP { get; set; }
     }
 }

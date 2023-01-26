@@ -15,6 +15,9 @@ namespace SystemGym.Domain.Entities.v1.Client
             Phone = phone;
             Document = document;
             Active = true;
+            RegistrationDate = DateTime.Now;
+            Benefits.Nutritionist = true;
+            Benefits.VIP = true;
         }
 
         public string Name { get; private set; }

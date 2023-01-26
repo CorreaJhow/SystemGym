@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Application.InputModels.v1.Client
 {
-    public class DeleteClientInputModel
+    public class UpdateNutritionistClientInputModel
     {
-        public string Name { get; set; }
         public string Document { get; set; }
+        public bool Nutritionist { get; set; }
     }
 }

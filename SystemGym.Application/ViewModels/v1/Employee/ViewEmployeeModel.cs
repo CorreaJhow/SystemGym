@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemGym.Application.InputModels.v1.Employee
+namespace SystemGym.Application.ViewModels.v1.Employee
 {
     public class ViewEmployeeModel
     {
