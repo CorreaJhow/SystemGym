@@ -12,7 +12,7 @@ namespace SystemGym.Controllers
         }
 
         [HttpGet("{Id}")]
-        public IActionResult GetById(string id)
+        public IActionResult GetByDocument(string document)
         {
             return Ok();
         }

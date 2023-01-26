@@ -12,7 +12,7 @@ namespace SystemGym.Controllers
         }
 
         [HttpGet("{Id}")]
-        public IActionResult GetById(string id)
+        public IActionResult GetByDocument(string document)
         {
             return Ok();
         }
@@ -32,7 +32,7 @@ namespace SystemGym.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteClientById([FromBody] string id) //criar deleteEmployee
+        public IActionResult DeleteClient([FromBody] string document) //criar deleteEmployee
         {
             //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
             return Ok();
