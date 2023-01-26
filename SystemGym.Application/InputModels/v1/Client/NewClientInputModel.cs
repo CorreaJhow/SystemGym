@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Application.InputModels.v1.Client
 {
-    internal class NewClientInputModel
+    public class NewClientInputModel
     {
     }
 }

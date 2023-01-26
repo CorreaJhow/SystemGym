@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using SystemGym.Domain.Entities.v1.Client;
 using SystemGym.Domain.Entities.v1.Employee;
 using SystemGym.Domain.Enum.v1;

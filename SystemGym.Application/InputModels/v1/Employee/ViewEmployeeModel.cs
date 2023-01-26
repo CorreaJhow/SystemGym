@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Application.InputModels.v1.Employee
 {
-    internal class ViewEmployeeModel
+    public class ViewEmployeeModel
     {
     }
 }
