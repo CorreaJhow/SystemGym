@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Domain.Enum.v1
 {
-    internal class PositionEnum
+    public enum PositionEnum
     {
+        Assistant = 0,
+        Teacher = 1,
+        Coordinator = 2, 
     }
 }

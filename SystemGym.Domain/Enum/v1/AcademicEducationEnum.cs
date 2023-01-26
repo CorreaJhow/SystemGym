@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Domain.Enum.v1
 {
-    internal class AcademicEducationEnum
+    public enum AcademicEducationEnum
     {
+        UniversiryCompleted = 0,
+        Masters = 1, 
+        Doctor = 2,
+        Especialist = 3
     }
 }

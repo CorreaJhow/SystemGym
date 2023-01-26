@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemGym.Domain.Repository
 {
-    internal class ProjectRepository
+    public interface IProjectRepository
     {
     }
 }

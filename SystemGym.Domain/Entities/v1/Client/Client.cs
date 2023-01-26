@@ -17,12 +17,12 @@ namespace SystemGym.Domain.Entities.v1.Client
             Active = true;
         }
 
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string Phone { get; set; }
-        public string Document { get; set; }
-        public bool Active { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public ClientBenefits Benefits { get; set; }
+        public string Name { get; private set; }
+        public int Age { get; private set; }
+        public string Phone { get; private set; }
+        public string Document { get; private set; }
+        public bool Active { get; private set; }
+        public DateTime RegistrationDate { get; private set; }
+        public ClientBenefits Benefits { get; private set; }
     }
 }

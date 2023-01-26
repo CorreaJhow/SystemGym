@@ -19,6 +19,7 @@ namespace SystemGym.Domain.Entities.v1.Employee
             AcademicEducation = academicEducation;
             Position = position;
             Salary = salary;
+
             Active = true;
             HiringDate = DateTime.Now;
         }
