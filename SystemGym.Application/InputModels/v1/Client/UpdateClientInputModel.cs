@@ -8,6 +8,7 @@ namespace SystemGym.Application.InputModels.v1.Client
 {
     public class UpdateClientInputModel
     {
-       public string Document { get; set; }
+        public string Name { get; set; }
+        public string Document { get; set; }
     }
 }
