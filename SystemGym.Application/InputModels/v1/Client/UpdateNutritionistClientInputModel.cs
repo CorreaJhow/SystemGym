@@ -9,6 +9,6 @@ namespace SystemGym.Application.InputModels.v1.Client
     public class UpdateNutritionistClientInputModel
     {
         public string Document { get; set; }
-        public bool Nutritionist { get; set; }
+        public bool Nutritionist = true;
     }
 }

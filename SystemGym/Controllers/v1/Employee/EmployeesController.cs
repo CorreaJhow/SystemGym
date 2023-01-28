@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SystemGym.Controllers
+namespace SystemGym.Controllers.v1.Employee
 {
     [Route("api/v1/Employees")]
     public class EmployeesController : ControllerBase

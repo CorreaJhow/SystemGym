@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using SystemGym.Application.InputModels.v1.Client;
@@ -49,16 +50,44 @@ namespace SystemGym.Application.Services.Implementations
 
         public ClientViewModel GetByDocument(string document)
         {
-            throw new NotImplementedException();
+            var clients = _dbContext.Client;
+
+            var client = clients.FirstOrDefault(c => c.Document.Equals(document));
+            
+            if (client is null)
+                return null;
+
+            return new ClientViewModel(client.Name, client.Age, client.Phone, client.Active);
         }
 
-        public void UpdateVIPClient(UpdateVIPClientInputModel UpdateClient)
+        public void UpdateVIPClient(UpdateVIPClientInputModel updateClient)
         {
-            throw new NotImplementedException();
+            var clients = _dbContext.Client;
+
+            var client = clients.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
+            
+            if(client is null)
+                return;
+
+            if(client.Benefits.VIP != updateClient.VIP)
+            {
+                client.Benefits.VIP = updateClient.VIP;
+            }
+
         }
-        public void UpdateNutritionistClient(UpdateNutritionistClientInputModel UpdateClient)
+        public void UpdateNutritionistClient(UpdateNutritionistClientInputModel updateClient)
         {
-            throw new NotImplementedException();
+            var clients = _dbContext.Client;
+
+            var client = clients.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
+
+            if (client is null)
+                return;
+
+            if (client.Benefits.Nutritionist != updateClient.Nutritionist)
+            {
+                client.Benefits.Nutritionist = updateClient.Nutritionist;
+            }
         }
         public void UpdateClient(UpdateClientInputModel UpdateClient)
         {

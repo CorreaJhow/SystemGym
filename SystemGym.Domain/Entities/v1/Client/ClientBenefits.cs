@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SystemGym.Domain.Entities.v1
+namespace SystemGym.Domain.Entities.v1.Client
 {
     public class ClientBenefits : BaseEntity
     {
