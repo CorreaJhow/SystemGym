@@ -24,7 +24,7 @@ namespace SystemGym.Controllers.v1.Employee
         }
 
         [HttpPut]
-        public IActionResult UpdateEmployee([FromBody] string employee)
+        public IActionResult UpdatePositionEmployee([FromBody] string employee)
         {
             //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
             return Ok();

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using SystemGym.Application.InputModels.v1.Client;
 using SystemGym.Application.Services.Interfaces;
 using SystemGym.Application.ViewModels.v1.Client;
@@ -22,6 +18,7 @@ namespace SystemGym.Application.Services.Implementations
         public int RegisterClient(NewClientInputModel newClient)
         {
             var client = new Client(newClient.Name, newClient.Age, newClient.Phone, newClient.Document);
+
             _dbContext.Client.Add(client);
 
             return client.Id;
@@ -32,7 +29,7 @@ namespace SystemGym.Application.Services.Implementations
             var list = _dbContext.Client.ToList();
             foreach (var client in list)
             {
-                if(deleteClient.Document == client.Document)
+                if (deleteClient.Document == client.Document)
                 {
                     _dbContext.Client.Remove(client);
                 }
@@ -41,19 +38,17 @@ namespace SystemGym.Application.Services.Implementations
 
         public List<ClientViewModel> GetAll()
         {
-            var clients =_dbContext.Client;
+            var clients = _dbContext.Client;
 
-            var clientVieModels = clients.Select(c => new ClientViewModel(c.Name,c.Age,c.Phone,c.Active)).ToList();  
+            var clientVieModels = clients.Select(c => new ClientViewModel(c.Name, c.Age, c.Phone, c.Active)).ToList();
 
             return clientVieModels;
         }
 
         public ClientViewModel GetByDocument(string document)
         {
-            var clients = _dbContext.Client;
+            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(document));
 
-            var client = clients.FirstOrDefault(c => c.Document.Equals(document));
-            
             if (client is null)
                 return null;
 
@@ -62,36 +57,37 @@ namespace SystemGym.Application.Services.Implementations
 
         public void UpdateVIPClient(UpdateVIPClientInputModel updateClient)
         {
-            var clients = _dbContext.Client;
+            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
 
-            var client = clients.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
-            
-            if(client is null)
+            if (client is null)
                 return;
 
-            if(client.Benefits.VIP != updateClient.VIP)
-            {
+            if (client.Benefits.VIP != updateClient.VIP)
                 client.Benefits.VIP = updateClient.VIP;
-            }
+
 
         }
         public void UpdateNutritionistClient(UpdateNutritionistClientInputModel updateClient)
         {
-            var clients = _dbContext.Client;
-
-            var client = clients.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
+            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
 
             if (client is null)
                 return;
 
             if (client.Benefits.Nutritionist != updateClient.Nutritionist)
-            {
                 client.Benefits.Nutritionist = updateClient.Nutritionist;
-            }
+
         }
-        public void UpdateClient(UpdateClientInputModel UpdateClient)
+        public void UpdateClient(UpdateClientInputModel updateClient)
         {
-            throw new NotImplementedException();
+            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
+
+            if (client is null)
+                return;
+
+            _dbContext.Client.Remove(client);
+
+            _dbContext.Client.Add(new Client(updateClient.Name, updateClient.Age, updateClient.Phone, updateClient.Email));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,5 +13,6 @@ namespace SystemGym.Application.InputModels.v1.Client
         public int Age { get; private set; }
         public string Phone { get; private set; }
         public string Document { get; private set; }
+        public string Email { get; set; }
     }
 }
