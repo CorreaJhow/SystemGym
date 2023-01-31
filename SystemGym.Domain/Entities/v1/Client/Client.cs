@@ -16,8 +16,8 @@ namespace SystemGym.Domain.Entities.v1.Client
             Document = document;
             Active = true;
             RegistrationDate = DateTime.Now;
-            Benefits.Nutritionist = true;
-            Benefits.VIP = true;
+            //Benefits.Nutritionist = true;
+            //Benefits.VIP = true;
         }
 
         public Client(string name, int age, string phone, string document, string email)

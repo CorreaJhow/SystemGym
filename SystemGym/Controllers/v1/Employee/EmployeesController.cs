@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SystemGym.Application.Services.Interfaces;
 
 namespace SystemGym.Controllers.v1.Employee
 {
     [Route("api/v1/Employees")]
     public class EmployeesController : ControllerBase
     {
+        private readonly IEmployeeService _employeeService;
+        public EmployeesController(IEmployeeService employeeService)
+        {
+            _employeeService = employeeService;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -14,6 +21,7 @@ namespace SystemGym.Controllers.v1.Employee
         [HttpGet("{Id}")]
         public IActionResult GetByDocument(string document)
         {
+
             return Ok();
         }
 

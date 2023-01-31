@@ -8,7 +8,7 @@ namespace SystemGym.Domain.Entities.v1.Client
 {
     public class ClientBenefits : BaseEntity
     {
-        public bool VIP { get; set; }
-        public bool Nutritionist { get; set; }
+        public bool? VIP { get; set; }
+        public bool? Nutritionist { get; set; }
     }
 }

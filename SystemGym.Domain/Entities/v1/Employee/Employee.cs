@@ -22,9 +22,9 @@ namespace SystemGym.Domain.Entities.v1.Employee
 
             Active = true;
             HiringDate = DateTime.Now;
-            Benefits.Ticket = true;
-            Benefits.GymFree = true;
-            Benefits.HealthInsurance = true;
+            //Benefits.Ticket = true;
+            //Benefits.GymFree = true;
+            //Benefits.HealthInsurance = true;
         }
 
         public string Name { get; set; }

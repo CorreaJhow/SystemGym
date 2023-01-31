@@ -1,41 +1,81 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SystemGym.Application.InputModels.v1.Client;
+using SystemGym.Application.Services.Interfaces;
+using SystemGym.Domain.Entities.v1.Client;
 
 namespace SystemGym.Controllers.v1.Client
 {
     [Route("api/v1/Clients")]
     public class ClientsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IClientService _clientService;
+        public ClientsController(IClientService clientService)
         {
-            return Ok();
+            _clientService = clientService;
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var clients = _clientService.GetAll();
+
+            if (clients is null)
+                return NotFound("Error Message: There are no registered customers");
+
+            return Ok(clients);
+        }
+
+        [HttpGet("{Documents}")]
         public IActionResult GetByDocument(string document)
         {
-            return Ok();
+            var client = _clientService.GetByDocument(document);
+
+            if (client is null)
+                return NotFound("There are no customers registered with this document");
+
+            return Ok(client);
         }
 
         [HttpPost]
-        public IActionResult RegisterClient([FromBody] string employee) //criar employee 
+        public IActionResult RegisterClient([FromBody] NewClientInputModel inputClient) //criar employee 
         {
-            return Ok();
+            _clientService.RegisterClient(inputClient);
+
+            return Ok("Successfully registered customer");
+        }
+
+        [HttpPut("{Nutritionist}")]
+        public IActionResult UpdateNutritionistClient([FromBody] UpdateNutritionistClientInputModel inputClient)
+        {
+            _clientService.UpdateNutritionistClient(inputClient);
+
+            return Ok("Benefit \"Nutritionist\" updated successfully");
+
+        }
+
+        [HttpPut("{VIP}")]
+        public IActionResult UpdateVIPClient([FromBody] UpdateVIPClientInputModel inputClient)
+        {
+            _clientService.UpdateVIPClient(inputClient);
+
+            return Ok("Benefit \"VIP\" updated successfully");
+
         }
 
         [HttpPut]
-        public IActionResult UpdateClient([FromBody] string employee)
+        public IActionResult UpdateClient([FromBody] UpdateClientInputModel inputClient)
         {
-            //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
-            return Ok();
+            _clientService.UpdateClient(inputClient);
 
+            return Ok("Client updated successfully");
         }
 
         [HttpDelete]
-        public IActionResult DeleteClient([FromBody] string document) //criar deleteEmployee
+        public IActionResult DeleteClient([FromBody] DeleteClientInputModel inputClient)
         {
-            //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
-            return Ok();
+            _clientService.DeleteClient(inputClient);
+
+            return Ok("Customer deleted successfully");
         }
     }
 }
