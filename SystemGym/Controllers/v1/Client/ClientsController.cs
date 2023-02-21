@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SystemGym.Application.InputModels.v1.Client;
-using SystemGym.Application.Services.Interfaces;
-using SystemGym.Domain.Entities.v1.Client;
+using SystemGym.Application.Services.Contracts;
 
 namespace SystemGym.Controllers.v1.Client
 {
@@ -25,7 +24,7 @@ namespace SystemGym.Controllers.v1.Client
             return Ok(clients);
         }
 
-        [HttpGet("{Documents}")]
+        [HttpGet("{document}")]
         public IActionResult GetByDocument(string document)
         {
             var client = _clientService.GetByDocument(document);
@@ -37,35 +36,17 @@ namespace SystemGym.Controllers.v1.Client
         }
 
         [HttpPost]
-        public IActionResult RegisterClient([FromBody] NewClientInputModel inputClient) //criar employee 
+        public IActionResult RegisterClient([FromBody] NewClientInputModel inputClient) 
         {
             _clientService.RegisterClient(inputClient);
 
             return Ok("Successfully registered customer");
         }
 
-        [HttpPut("{Nutritionist}")]
-        public IActionResult UpdateNutritionistClient([FromBody] UpdateNutritionistClientInputModel inputClient)
-        {
-            _clientService.UpdateNutritionistClient(inputClient);
-
-            return Ok("Benefit \"Nutritionist\" updated successfully");
-
-        }
-
-        [HttpPut("{VIP}")]
-        public IActionResult UpdateVIPClient([FromBody] UpdateVIPClientInputModel inputClient)
-        {
-            _clientService.UpdateVIPClient(inputClient);
-
-            return Ok("Benefit \"VIP\" updated successfully");
-
-        }
-
         [HttpPut]
-        public IActionResult UpdateClient([FromBody] UpdateClientInputModel inputClient)
+        public IActionResult UpdateClient(string document, [FromBody] UpdateClientInputModel inputClient)
         {
-            _clientService.UpdateClient(inputClient);
+            _clientService.UpdateClient(document, inputClient);
 
             return Ok("Client updated successfully");
         }

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemGym.Application.InputModels.v1.Client
+﻿namespace SystemGym.Application.InputModels.v1.Client
 {
     public class UpdateClientInputModel
     {
+        public UpdateClientInputModel(string name, int age, string phone, string document, string email)
+        {
+            Name = name;
+            Age = age;
+            Phone = phone;
+            Document = document;
+            Email = email;
+        }
+
         public string Name { get; private set; }
         public int Age { get; private set; }
         public string Phone { get; private set; }

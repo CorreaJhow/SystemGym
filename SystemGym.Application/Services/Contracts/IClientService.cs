@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using SystemGym.Application.InputModels.v1.Client;
 using SystemGym.Application.ViewModels.v1.Client;
-using SystemGym.Domain.Entities.v1.Client;
 
-namespace SystemGym.Application.Services.Interfaces
+namespace SystemGym.Application.Services.Contracts
 {
     public interface IClientService
     {
@@ -13,13 +12,9 @@ namespace SystemGym.Application.Services.Interfaces
 
         public List<ClientViewModel> GetAll();
 
-        public ClientViewModel GetByDocument(string document);
+        public ClientDetailsViewModels GetByDocument(string document);
 
-        public void UpdateVIPClient(UpdateVIPClientInputModel updateClient);
+        public void UpdateClient(string document, UpdateClientInputModel updateClient);
 
-        public void UpdateNutritionistClient(UpdateNutritionistClientInputModel updateClient);
-
-        public void UpdateClient(UpdateClientInputModel updateClient);
-        
     }
 }

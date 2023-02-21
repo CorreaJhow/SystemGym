@@ -18,9 +18,9 @@ namespace SystemGym.Infrastructure.Persistence
 
             Client = new List<Client>
             {
-                new Client("Jhow", 22, "(11) 55555-5555","51.123.123-21"),
-                new Client("Xico", 20, "(11) 44444-4444","52.456.321-22"),
-                new Client("Clayton", 25, "(11) 33333-3333","53.789.213-23"),
+                new Client("Jhow", 22, "(11) 55555-5555","5112312321"),
+                new Client("Xico", 20, "(11) 44444-4444","5245632122"),
+                new Client("Clayton", 25, "(11) 33333-3333","5378921323"),
             };
         }
         public List<Employee> Employee { get; set; }

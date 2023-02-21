@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Insfrastructure", "4 - 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemGym.Domain", "SystemGym.Domain\SystemGym.Domain.csproj", "{D2FD56BE-0B5C-4485-A7DA-BBB865DBBEEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemGym.Infrastructure", "SystemGym.Infrastructure\SystemGym.Infrastructure.csproj", "{F569DA4D-75F8-47E5-B5EC-4F6565E2F60E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemGym.Infrastructure", "SystemGym.Infrastructure\SystemGym.Infrastructure.csproj", "{F569DA4D-75F8-47E5-B5EC-4F6565E2F60E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemGym.Application", "SystemGym.Application\SystemGym.Application.csproj", "{95D2FF18-1BDE-4566-95E5-0BC442CCD754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemGym.Application", "SystemGym.Application\SystemGym.Application.csproj", "{95D2FF18-1BDE-4566-95E5-0BC442CCD754}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{E8372A44-79F0-424C-B564-70420A86931A}"
 EndProject

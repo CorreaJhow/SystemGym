@@ -11,8 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SystemGym.Application.Services.Contracts;
 using SystemGym.Application.Services.Implementations;
-using SystemGym.Application.Services.Interfaces;
 using SystemGym.Infrastructure.Persistence;
 
 namespace SystemGym

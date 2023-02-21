@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SystemGym.Application.InputModels.v1.Client;
-using SystemGym.Application.Services.Interfaces;
+using SystemGym.Application.Services.Contracts;
 using SystemGym.Application.ViewModels.v1.Client;
 using SystemGym.Domain.Entities.v1.Client;
 using SystemGym.Infrastructure.Persistence;
@@ -40,54 +40,32 @@ namespace SystemGym.Application.Services.Implementations
         {
             var clients = _dbContext.Client;
 
-            var clientVieModels = clients.Select(c => new ClientViewModel(c.Name, c.Age, c.Phone, c.Active)).ToList();
+            var clientVieModels = clients.Select(c => new ClientViewModel(c.Name, c.Age, c.Phone, c.Active,c.Document)).ToList();
 
             return clientVieModels;
         }
 
-        public ClientViewModel GetByDocument(string document)
+        public ClientDetailsViewModels GetByDocument(string document)
         {
             var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(document));
 
             if (client is null)
                 return null;
 
-            return new ClientViewModel(client.Name, client.Age, client.Phone, client.Active);
-        }
-
-        public void UpdateVIPClient(UpdateVIPClientInputModel updateClient)
-        {
-            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
-
-            if (client is null)
-                return;
-
-            if (client.Benefits.VIP != updateClient.VIP)
-                client.Benefits.VIP = updateClient.VIP;
-
+            return new ClientDetailsViewModels(client.Name, client.Age, client.Phone, client.Document, client.Email, client.Active, client.RegistrationDate);
 
         }
-        public void UpdateNutritionistClient(UpdateNutritionistClientInputModel updateClient)
+
+        public void UpdateClient(string document, UpdateClientInputModel updateClient)
         {
-            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
-
-            if (client is null)
-                return;
-
-            if (client.Benefits.Nutritionist != updateClient.Nutritionist)
-                client.Benefits.Nutritionist = updateClient.Nutritionist;
-
-        }
-        public void UpdateClient(UpdateClientInputModel updateClient)
-        {
-            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(updateClient.Document));
+            var client = _dbContext.Client.FirstOrDefault(c => c.Document.Equals(document));
 
             if (client is null)
                 return;
 
             _dbContext.Client.Remove(client);
 
-            _dbContext.Client.Add(new Client(updateClient.Name, updateClient.Age, updateClient.Phone, updateClient.Email));
+            _dbContext.Client.Add(new Client(updateClient.Name, updateClient.Age, updateClient.Phone, updateClient.Document, updateClient.Email));
         }
     }
 }

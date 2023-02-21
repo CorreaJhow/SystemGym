@@ -16,8 +16,6 @@ namespace SystemGym.Domain.Entities.v1.Client
             Document = document;
             Active = true;
             RegistrationDate = DateTime.Now;
-            //Benefits.Nutritionist = true;
-            //Benefits.VIP = true;
         }
 
         public Client(string name, int age, string phone, string document, string email)
@@ -36,6 +34,5 @@ namespace SystemGym.Domain.Entities.v1.Client
         public string Email { get; private set; }
         public bool Active { get; private set; }
         public DateTime RegistrationDate { get; private set; }
-        public ClientBenefits Benefits { get; private set; }
     }
 }

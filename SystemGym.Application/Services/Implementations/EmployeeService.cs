@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SystemGym.Application.InputModels.v1.Employee;
-using SystemGym.Application.Services.Interfaces;
+using SystemGym.Application.Services.Contracts;
 using SystemGym.Application.ViewModels.v1.Employee;
 using SystemGym.Domain.Entities.v1.Employee;
 using SystemGym.Infrastructure.Persistence;

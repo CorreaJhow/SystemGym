@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SystemGym.Application.Services.Interfaces;
+using SystemGym.Application.Services.Contracts;
 
 namespace SystemGym.Controllers.v1.Employee
 {

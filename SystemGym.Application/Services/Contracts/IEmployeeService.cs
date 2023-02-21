@@ -2,7 +2,7 @@
 using SystemGym.Application.InputModels.v1.Employee;
 using SystemGym.Application.ViewModels.v1.Employee;
 
-namespace SystemGym.Application.Services.Interfaces
+namespace SystemGym.Application.Services.Contracts
 {
     public interface IEmployeeService
     {
