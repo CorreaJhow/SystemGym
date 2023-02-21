@@ -6,10 +6,10 @@ namespace SystemGym.Application.Services.Contracts
 {
     public interface IEmployeeService
     {
-        public void DeleteEmployee(DeleteEmployeeInputModel deleteEmployeeInputModel);
+        public int DeleteEmployee(DeleteEmployeeInputModel deleteEmployeeInputModel);
         public List<ViewEmployeeModel> GetAll();
         public ViewEmployeeModel GetByDocument(string document);
         public int RegisterEmployee(RegisterEmployeeInputModel newEmployeeInputModel);
-        public void UpdatePositionEmployee(UpdatePositionEmployeeInputModel updateEmployeeInputModel);
+        public int UpdateEmployee(string document, UpdateEmployeeInputModel updateEmployeeInputModel);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection.Metadata;
 using SystemGym.Application.InputModels.v1.Employee;
 using SystemGym.Application.Services.Contracts;
 using SystemGym.Application.ViewModels.v1.Employee;
@@ -15,7 +17,7 @@ namespace SystemGym.Application.Services.Implementations
         {
             _dbContext = dbContext;
         }
-        public void DeleteEmployee(DeleteEmployeeInputModel deleteEmployeeInputModel)
+        public int DeleteEmployee(DeleteEmployeeInputModel deleteEmployeeInputModel)
         {
             var employees = _dbContext.Employee;
 
@@ -24,23 +26,23 @@ namespace SystemGym.Application.Services.Implementations
                 if (employee.Document.Equals(deleteEmployeeInputModel.Document))
                 {
                     employees.Remove(employee);
+                    return 1;
                 }
             }
+            return 0;
         }
 
         public List<ViewEmployeeModel> GetAll()
         {
             var employess = _dbContext.Employee;
 
-            return employess.Select(e => new ViewEmployeeModel(e.Name, e.Position, e.HiringDate, e.Active)).ToList();
+            return employess.Select(e => new ViewEmployeeModel(e.Name, e.Position, e.HiringDate, e.Active, e.Document)).ToList();
         }
 
         public ViewEmployeeModel GetByDocument(string document)
         {
-            var employees = _dbContext.Employee;
-
-            var employee = employees.Where(e => e.Document.Equals(document))
-                                    .Select(e => new ViewEmployeeModel(e.Name, e.Position, e.HiringDate, e.Active)).ToList();
+            var employee = _dbContext.Employee.Where(e => e.Document.Equals(document))
+                                    .Select(e => new ViewEmployeeModel(e.Name, e.Position, e.HiringDate, e.Active, e.Document)).ToList();
 
             if (employee is null)
                 return null;
@@ -50,33 +52,38 @@ namespace SystemGym.Application.Services.Implementations
 
         public int RegisterEmployee(RegisterEmployeeInputModel newEmployeeInputModel)
         {
-            var employeeExist = _dbContext.Employee.Select(e => e.Document.Equals(newEmployeeInputModel.Document));
+            var employeeExist = _dbContext.Employee.Where(e => e.Document.Equals(newEmployeeInputModel.Document))
+                                    .Select(e => new ViewEmployeeModel(e.Name, e.Position, e.HiringDate, e.Active, e.Document)).ToList();
 
-            if (employeeExist != null)
-                return 0; //funcionario com esse cpf já registrado
+            if (employeeExist.Count == 0)
+            {
+                _dbContext.Employee.Add(new Employee(newEmployeeInputModel.Name, newEmployeeInputModel.Document, newEmployeeInputModel.Phone,
+                           newEmployeeInputModel.Email, newEmployeeInputModel.AcademicEducation, newEmployeeInputModel.Position,
+                           newEmployeeInputModel.Salary));
+
+                return 1;
+            }
             else
             {
-                var employeeRegistered = new Employee(newEmployeeInputModel.Name, newEmployeeInputModel.Document, newEmployeeInputModel.Phone,
-                         newEmployeeInputModel.Email, newEmployeeInputModel.AcademicEducation, newEmployeeInputModel.Position,
-                         newEmployeeInputModel.Salary);
-
-                _dbContext.Employee.Add(employeeRegistered);
-
-                return employeeRegistered.Id;
+                return 0; //funcionario com esse cpf já registrado
             }
         }
 
-        public void UpdatePositionEmployee(UpdatePositionEmployeeInputModel updateEmployeeInputModel)
+        public int UpdateEmployee(string document, UpdateEmployeeInputModel updateEmployeeInputModel)
         {
-            var employee = _dbContext.Employee.FirstOrDefault(e => e.Document.Equals(updateEmployeeInputModel.Document));
+            var employee = _dbContext.Employee.FirstOrDefault(e => e.Document.Equals(document));
 
-            if (employee != null)
-                return;
+            if (employee is null)
+                return 0;
+
             _dbContext.Employee.Remove(employee);
 
-            employee.Position = updateEmployeeInputModel.Position;
+            var updateEmployee = new Employee(updateEmployeeInputModel.Name, updateEmployeeInputModel.Document, updateEmployeeInputModel.Phone, updateEmployeeInputModel.Email,
+                                                 updateEmployeeInputModel.AcademicEducation, updateEmployeeInputModel.Position, updateEmployeeInputModel.Salary);
 
-            _dbContext.Employee.Add(employee);
+            _dbContext.Employee.Add(updateEmployee);
+
+            return 1;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SystemGym.Application.InputModels.v1.Employee;
 using SystemGym.Application.Services.Contracts;
 
 namespace SystemGym.Controllers.v1.Employee
@@ -15,38 +16,70 @@ namespace SystemGym.Controllers.v1.Employee
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            var employees = _employeeService.GetAll();
+
+            if (employees is null)
+            {
+                return NotFound("Error message: There are no registered employees");
+                //LogDeError
+            }
+
+            return Ok(employees);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{document}")]
         public IActionResult GetByDocument(string document)
         {
+            var employee = _employeeService.GetByDocument(document);
 
-            return Ok();
+            if (employee is null)
+            {
+                return NotFound("Error message: No employees found with this document");
+                //LogsError            
+            }
+
+            return Ok(employee);
         }
 
         [HttpPost]
-        public IActionResult RegisterEmployee([FromBody] string employee) //criar employee 
+        public IActionResult RegisterEmployee([FromBody] RegisterEmployeeInputModel registerEmployee)
         {
-            return Ok();
+            var id = _employeeService.RegisterEmployee(registerEmployee);
+
+            if (id == 0)
+            {
+                return BadRequest("Error message: Employee with this document already registered");
+                //LogError            
+            }
+
+            return Ok("Successfully registered customer");
         }
 
         [HttpPut]
-        public IActionResult UpdatePositionEmployee([FromBody] string employee)
+        public IActionResult UpdateEmployee(string document, [FromBody] UpdateEmployeeInputModel updateEmployee)
         {
-            //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
-            return Ok();
+            var id = _employeeService.UpdateEmployee(document, updateEmployee);
 
+            if (id == 0)
+            {
+                return NotFound("Error message: No employees found with this document");
+                //logerror
+            }
+            
+            return Ok("Successfully updated employee");
         }
 
         [HttpDelete]
-        public IActionResult DeleteEmployeeById([FromBody] string id) //criar deleteEmployee
+        public IActionResult DeleteEmployeeByDocument([FromBody] DeleteEmployeeInputModel deleteEmploye)
         {
-            //verificar se employee existe em banco de dados, se sim atualizar dados, se nao retornar erro
-            return Ok();
-
+            var id = _employeeService.DeleteEmployee(deleteEmploye);
+            
+            if(id == 0)
+            {
+                return NotFound("Error message: No employees found with this document");
+                //logError
+            }
+            return Ok("Employee removed successfully");
         }
-
-
     }
 }
